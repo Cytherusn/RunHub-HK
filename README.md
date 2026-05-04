@@ -48,6 +48,7 @@ Contains code shared between the client and server.
 ### Development
 To start the development server (both frontend and backend):
 ```bash
+npm install  # This installs all the dependencies
 npm run dev
 ```
 
