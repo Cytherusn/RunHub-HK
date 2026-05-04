@@ -1,6 +1,6 @@
 # RunHub HK - Project Structure & Usage
 
-This document provides an overview of the project structure and the purpose of each key file and directory.
+RunHub HK is a modern community-driven platform for runners in Hong Kong, featuring race hosting, community feeds, and personal profiles.
 
 ## 📂 Directory Structure
 
@@ -10,14 +10,14 @@ Contains the frontend React application built with Vite and Tailwind CSS.
 - `src/components/`: Reusable UI components (shadcn/ui).
 - `src/context/`: React context providers (e.g., AuthContext).
 - `src/hooks/`: Custom React hooks.
-- `src/pages/`: Main application pages (Landing, Login, Dashboard, etc.).
+- `src/pages/`: Main application pages including [landing.tsx](file:///c:/Users/user/Desktop/RunHub-HK/client/src/pages/landing.tsx), [community-feed.tsx](file:///c:/Users/user/Desktop/RunHub-HK/client/src/pages/community-feed.tsx), and the new [profile.tsx](file:///c:/Users/user/Desktop/RunHub-HK/client/src/pages/profile.tsx).
 - `src/App.tsx`: Main application router and layout.
 
 ### `server/`
 Contains the Express.js backend.
 - `auth.ts`: Passport.js authentication configuration.
-- `storage.ts`: Database connection and storage interface (now using SQLite).
-- `routes.ts`: API route definitions.
+- `storage.ts`: Database connection and storage interface (using SQLite).
+- `routes.ts` & `community-routes.ts`: API route definitions.
 - `seed.ts` & `community-seed.ts`: Scripts for populating the database with test data.
 - `vite.ts`: Vite development server integration for Express.
 
@@ -36,32 +36,41 @@ Contains code shared between the client and server.
 - `tsconfig.json`: TypeScript configuration.
 - `vite.config.ts`: Vite configuration for the frontend and development server.
 - `tailwind.config.ts` & `postcss.config.js`: Styling configuration.
-- `drizzle.config.ts`: Configuration for Drizzle Kit (database migrations).
-- `components.json`: Configuration for shadcn/ui components.
 - `.env`: Environment variables (Port, Secrets).
 - `data.db`: SQLite database file.
 
 ---
 
-## 🚀 Usage
-### Preparation
-Before starting the server on localhost:
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v20 or higher recommended)
+- **Windows Users**: Ensure [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) are installed for `better-sqlite3` native compilation.
+
+### Installation
 ```bash
-npm install  # This installs all the dependencies
-npm audit
+npm install
 ```
 
-### Development
+### Running Locally
 To start the development server (both frontend and backend):
 ```bash
 npm run dev
 ```
+The app will be available at `http://localhost:5000`.
 
-### Build
-To build the project for production:
+### Production Build
 ```bash
 npm run build
+npm start
 ```
 
-### Database
-The project uses **SQLite** for local development. Tables are automatically initialized and seeded when the server starts.
+---
+
+## 🔒 Security & Optimization
+- **Helmet**: Integrated for secure HTTP headers.
+- **Node.js Native Env**: Uses `--env-file` (Node v20+) for environment variable management.
+- **Dependencies**: Optimized to remove unused packages and minimize bundle size.
+
+## 🛠 Database
+The project uses **SQLite** for local development. Tables are automatically initialized and seeded when the server starts via [index.ts](file:///c:/Users/user/Desktop/RunHub-HK/server/index.ts).

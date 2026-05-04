@@ -12,6 +12,7 @@ import CommunityFeedPage from "@/pages/community-feed";
 import CreateRunPage from "@/pages/create-run";
 import RunDetailPage from "@/pages/run-detail";
 import HostDashboardPage from "@/pages/host-dashboard";
+import ProfilePage from "@/pages/profile";
 import NotFound from "@/pages/not-found";
 
 // Redirect to login if not authenticated
@@ -52,6 +53,9 @@ function AppRoutes() {
         </Route>
         <Route path="/community/dashboard">
           <ProtectedRoute component={HostDashboardPage} />
+        </Route>
+        <Route path="/profile">
+          <ProtectedRoute component={ProfilePage} />
         </Route>
         <Route component={NotFound} />
       </Switch>

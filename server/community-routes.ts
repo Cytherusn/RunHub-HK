@@ -286,4 +286,24 @@ export function registerCommunityRoutes(app: Express) {
       res.status(500).json({ error: String(e) });
     }
   });
+
+  // ─── PATCH /api/users/:id ────────────────────────────────────────────────
+  app.patch("/api/users/:id", async (req, res) => {
+    try {
+      if (!req.isAuthenticated || !req.isAuthenticated()) {
+        return res.status(401).json({ error: "Unauthorized" });
+      }
+
+      const userId = Number(req.params.id);
+      if ((req.user as any).id !== userId) {
+        return res.status(403).json({ error: "Forbidden" });
+      }
+
+      const { name, bio, location } = req.body;
+      const updatedUser = await storage.updateUserProfile(userId, { name, bio, location });
+      res.json(updatedUser);
+    } catch (e) {
+      res.status(500).json({ error: String(e) });
+    }
+  });
 }

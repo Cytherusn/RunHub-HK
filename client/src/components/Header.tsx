@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Bell, Sun, Moon, Users, LogOut, LayoutDashboard, ChevronDown, Crown, ShieldCheck, Zap } from "lucide-react";
+import { Bell, Sun, Moon, Users, LogOut, LayoutDashboard, User as UserIcon, ChevronDown, Crown, ShieldCheck, Zap } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -110,6 +110,16 @@ export default function Header() {
                     <p className="text-sm font-semibold text-foreground truncate">{user.name}</p>
                     <p className="text-xs text-muted-foreground truncate">@{user.handle}</p>
                   </div>
+
+                  <Link
+                    href="/profile"
+                    className="flex items-center gap-2.5 px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors no-underline"
+                    onClick={() => setMenuOpen(false)}
+                    data-testid="menu-profile"
+                  >
+                    <UserIcon size={14} className="text-muted-foreground" />
+                    My Profile
+                  </Link>
 
                   <Link
                     href="/community/dashboard"

@@ -104,6 +104,7 @@ export interface IStorage {
   createUser(user: any): Promise<User>;
   insertUser(user: InsertUser): Promise<User>;
   updateUserStats(id: number, data: Partial<User>): Promise<void>;
+  updateUserProfile(id: number, data: { name?: string; bio?: string; location?: string }): Promise<User>;
   updateUserGoogleAvatar(id: number, avatar: string): Promise<void>;
   getRunsHostedThisMonth(userId: number): Promise<number>;
 
@@ -147,6 +148,13 @@ export const storage: IStorage = {
   },
   async updateUserStats(id, data) {
     await db.update(users).set(data as any).where(eq(users.id, id));
+  },
+  async updateUserProfile(id, data) {
+    return db.update(users)
+      .set(data)
+      .where(eq(users.id, id))
+      .returning()
+      .then(r => r[0]);
   },
   async updateUserGoogleAvatar(id, avatar) {
     await db.update(users).set({ googleAvatar: avatar }).where(eq(users.id, id));
