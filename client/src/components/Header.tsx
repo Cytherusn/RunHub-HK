@@ -39,33 +39,29 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="mx-auto max-w-6xl px-4 flex items-center justify-between h-14">
         {/* Logo */}
-        <Link href="/community">
-          <a className="flex items-center gap-2.5 text-foreground no-underline" data-testid="link-logo">
-            <LogoMark />
-            <span className="font-display font-bold text-lg tracking-tight hidden sm:block">
-              RunHub<span className="text-primary">HK</span>
-            </span>
-          </a>
+        <Link href="/community" className="flex items-center gap-2.5 text-foreground no-underline" data-testid="link-logo">
+          <LogoMark />
+          <span className="font-display font-bold text-lg tracking-tight hidden sm:block">
+            RunHub<span className="text-primary">HK</span>
+          </span>
         </Link>
 
         {/* Nav */}
         <nav className="flex items-center gap-0.5">
-          <Link href="/community">
-            <a
-              className={`flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md transition-colors ${isActive("/community") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
-              data-testid="nav-community"
-            >
-              <Users size={13} />
-              Community
-            </a>
+          <Link
+            href="/community"
+            className={`flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md transition-colors ${isActive("/community") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+            data-testid="nav-community"
+          >
+            <Users size={13} />
+            Community
           </Link>
-          <Link href="/community/dashboard">
-            <a
-              className={`text-sm px-3 py-1.5 rounded-md transition-colors hidden sm:block ${isActive("/community/dashboard") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
-              data-testid="nav-dashboard"
-            >
-              My Runs
-            </a>
+          <Link
+            href="/community/dashboard"
+            className={`text-sm px-3 py-1.5 rounded-md transition-colors hidden sm:block ${isActive("/community/dashboard") ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+            data-testid="nav-dashboard"
+          >
+            My Runs
           </Link>
 
           {/* Theme toggle */}
@@ -115,15 +111,14 @@ export default function Header() {
                     <p className="text-xs text-muted-foreground truncate">@{user.handle}</p>
                   </div>
 
-                  <Link href="/community/dashboard">
-                    <a
-                      className="flex items-center gap-2.5 px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors no-underline"
-                      onClick={() => setMenuOpen(false)}
-                      data-testid="menu-dashboard"
-                    >
-                      <LayoutDashboard size={14} className="text-muted-foreground" />
-                      My Runs Dashboard
-                    </a>
+                  <Link
+                    href="/community/dashboard"
+                    className="flex items-center gap-2.5 px-3 py-2 text-sm text-foreground hover:bg-muted transition-colors no-underline"
+                    onClick={() => setMenuOpen(false)}
+                    data-testid="menu-dashboard"
+                  >
+                    <LayoutDashboard size={14} className="text-muted-foreground" />
+                    My Runs Dashboard
                   </Link>
 
                   <button

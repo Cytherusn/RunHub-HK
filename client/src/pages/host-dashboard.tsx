@@ -143,11 +143,13 @@ function DashRunCard({ run, onCancel }: { run: CommunityRun; onCancel: (id: numb
       {/* Actions */}
       {!isCompleted && !isCancelled && (
         <div className="flex gap-2 pt-2 border-t border-border">
-          <Link href={`/community/run/${run.id}`}>
-            <a className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-background rounded-lg border border-border hover:border-muted-foreground transition-colors no-underline" data-testid={`button-view-${run.id}`}>
-              <ChevronRight size={12} />
-              View
-            </a>
+          <Link
+            href={`/community/run/${run.id}`}
+            className="flex-1 flex items-center justify-center gap-1 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground bg-background rounded-lg border border-border hover:border-muted-foreground transition-colors no-underline"
+            data-testid={`button-view-${run.id}`}
+          >
+            <ChevronRight size={12} />
+            View
           </Link>
           <button
             onClick={() => onCancel(run.id)}
@@ -162,10 +164,12 @@ function DashRunCard({ run, onCancel }: { run: CommunityRun; onCancel: (id: numb
 
       {isCompleted && (
         <div className="pt-2 border-t border-border">
-          <Link href={`/community/run/${run.id}`}>
-            <a className="text-xs text-muted-foreground hover:text-primary transition-colors no-underline flex items-center gap-1" data-testid={`link-view-completed-${run.id}`}>
-              View run & ratings <ChevronRight size={11} />
-            </a>
+          <Link
+            href={`/community/run/${run.id}`}
+            className="text-xs text-muted-foreground hover:text-primary transition-colors no-underline flex items-center gap-1"
+            data-testid={`link-view-completed-${run.id}`}
+          >
+            View run & ratings <ChevronRight size={11} />
           </Link>
         </div>
       )}
@@ -217,14 +221,13 @@ export default function HostDashboardPage() {
             <h1 className="text-xl font-display font-bold text-foreground">Host Dashboard</h1>
             <p className="text-sm text-muted-foreground mt-0.5">Manage your runs</p>
           </div>
-          <Link href="/community/create">
-            <a
-              className="flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-3.5 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
-              data-testid="button-create-run"
-            >
-              <Plus size={15} />
-              New Run
-            </a>
+          <Link
+            href="/community/create"
+            className="flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-3.5 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
+            data-testid="button-create-run"
+          >
+            <Plus size={15} />
+            New Run
           </Link>
         </div>
 
@@ -331,11 +334,12 @@ export default function HostDashboardPage() {
                   <div className="text-center py-12">
                     <p className="text-3xl mb-3">🏃</p>
                     <p className="text-muted-foreground text-sm mb-4">No upcoming runs yet.</p>
-                    <Link href="/community/create">
-                      <a className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline">
-                        <Plus size={14} />
-                        Host a Run
-                      </a>
+                    <Link
+                      href="/community/create"
+                      className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
+                    >
+                      <Plus size={14} />
+                      Host a Run
                     </Link>
                   </div>
                 ) : (

@@ -1,5 +1,5 @@
-import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
+import helmet from "helmet";
 import session from "express-session";
 import MemoryStoreFactory from "memorystore";
 import { registerRoutes } from "./routes";
@@ -15,6 +15,11 @@ import { initDb } from "./storage";
 const MemoryStore = MemoryStoreFactory(session);
 
 const app = express();
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 const httpServer = createServer(app);
 
 declare module "http" {
@@ -78,14 +83,13 @@ app.use((req, res, next) => {
 
   res.on("finish", () => {
     const duration = Date.now() - start;
+    let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
-      log(logLine);
     }
+    log(logLine);
   });
 
   next();
@@ -98,6 +102,16 @@ app.use((req, res, next) => {
   registerAuthRoutes(app);
   registerCommunityRoutes(app);
   await registerRoutes(httpServer, app);
+
+  // importantly only setup vite in development and after
+  // setting up all the other routes so the catch-all route
+  // doesn't interfere with the other routes
+  if (process.env.NODE_ENV === "production") {
+    serveStatic(app);
+  } else {
+    const { setupVite } = await import("./vite");
+    await setupVite(httpServer, app);
+  }
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
@@ -112,16 +126,6 @@ app.use((req, res, next) => {
     return res.status(status).json({ message });
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (process.env.NODE_ENV === "production") {
-    serveStatic(app);
-  } else {
-    const { setupVite } = await import("./vite");
-    await setupVite(httpServer, app);
-  }
-
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
@@ -130,8 +134,7 @@ app.use((req, res, next) => {
   httpServer.listen(
     {
       port,
-      host: "0.0.0.0",
-      reusePort: true,
+      host: "127.0.0.1",
     },
     () => {
       log(`serving on port ${port}`);

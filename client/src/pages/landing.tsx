@@ -60,18 +60,15 @@ export default function LandingPage() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/login">
-              <a className="text-sm text-muted-foreground hover:text-foreground px-3 py-1.5 transition-colors no-underline">
-                Sign in
-              </a>
+            <Link href="/login" className="text-sm text-muted-foreground hover:text-foreground px-3 py-1.5 transition-colors no-underline">
+              Sign in
             </Link>
-            <Link href="/login?tab=register">
-              <a
-                className="text-sm font-semibold bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
-                data-testid="button-get-started-nav"
-              >
-                Get started
-              </a>
+            <Link
+              href="/login?tab=register"
+              className="text-sm font-semibold bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
+              data-testid="button-get-started-nav"
+            >
+              Get started
             </Link>
           </div>
         </div>
@@ -99,19 +96,19 @@ export default function LandingPage() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center gap-3 mb-16">
-          <Link href="/login?tab=register">
-            <a
-              className="flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-xl hover:bg-primary/90 transition-all text-sm no-underline glow-primary"
-              data-testid="button-cta-register"
-            >
-              Create free account
-              <ChevronRight size={16} />
-            </a>
+          <Link
+            href="/login?tab=register"
+            className="flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-xl hover:bg-primary/90 transition-all text-sm no-underline glow-primary"
+            data-testid="button-cta-register"
+          >
+            Create free account
+            <ChevronRight size={16} />
           </Link>
-          <Link href="/login">
-            <a className="flex items-center gap-2 border border-border text-foreground font-medium px-6 py-3 rounded-xl hover:border-muted-foreground transition-colors text-sm no-underline">
-              Sign in
-            </a>
+          <Link
+            href="/login"
+            className="flex items-center gap-2 border border-border text-foreground font-medium px-6 py-3 rounded-xl hover:border-muted-foreground transition-colors text-sm no-underline"
+          >
+            Sign in
           </Link>
         </div>
 

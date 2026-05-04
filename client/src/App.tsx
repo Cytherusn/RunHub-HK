@@ -42,16 +42,16 @@ function AppRoutes() {
         <Route path="/" component={LandingPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/community">
-          {() => <ProtectedRoute component={CommunityFeedPage} />}
+          <ProtectedRoute component={CommunityFeedPage} />
         </Route>
         <Route path="/community/create">
-          {() => <ProtectedRoute component={CreateRunPage} />}
+          <ProtectedRoute component={CreateRunPage} />
         </Route>
         <Route path="/community/run/:id">
-          {() => <ProtectedRoute component={RunDetailPage} />}
+          <ProtectedRoute component={RunDetailPage} />
         </Route>
         <Route path="/community/dashboard">
-          {() => <ProtectedRoute component={HostDashboardPage} />}
+          <ProtectedRoute component={HostDashboardPage} />
         </Route>
         <Route component={NotFound} />
       </Switch>

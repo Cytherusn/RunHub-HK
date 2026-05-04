@@ -103,78 +103,77 @@ function RunCard({ run }: { run: CommunityRun }) {
     : `${run.participantCount} joined`;
 
   return (
-    <Link href={`/community/run/${run.id}`}>
-      <a
-        className="block bg-card border border-border rounded-xl p-4 race-card-hover cursor-pointer no-underline"
-        data-testid={`card-run-${run.id}`}
-      >
-        {/* Top row */}
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <div className="flex items-center gap-2.5 min-w-0">
-            {run.host && <Avatar user={run.host} size={34} />}
-            <div className="min-w-0">
-              <p className="text-xs text-muted-foreground leading-none mb-0.5">
-                @{run.host?.handle}
-                {run.host && run.host.avgRating > 0 && (
-                  <span className="inline-flex items-center gap-0.5 ml-1.5 text-amber-400">
-                    <Star size={9} fill="currentColor" />
-                    {run.host.avgRating.toFixed(1)}
-                  </span>
-                )}
-              </p>
-              <p className="font-semibold text-foreground text-sm leading-tight truncate">
-                {run.title}
-              </p>
-            </div>
+    <Link
+      href={`/community/run/${run.id}`}
+      className="block bg-card border border-border rounded-xl p-4 race-card-hover cursor-pointer no-underline"
+      data-testid={`card-run-${run.id}`}
+    >
+      {/* Top row */}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          {run.host && <Avatar user={run.host} size={34} />}
+          <div className="min-w-0">
+            <p className="text-xs text-muted-foreground leading-none mb-0.5">
+              @{run.host?.handle}
+              {run.host && run.host.avgRating > 0 && (
+                <span className="inline-flex items-center gap-0.5 ml-1.5 text-amber-400">
+                  <Star size={9} fill="currentColor" />
+                  {run.host.avgRating.toFixed(1)}
+                </span>
+              )}
+            </p>
+            <p className="font-semibold text-foreground text-sm leading-tight truncate">
+              {run.title}
+            </p>
           </div>
-          <span
-            className={`flex-shrink-0 inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${meta.badgeClass}`}
-            data-testid={`badge-type-${run.id}`}
-          >
-            <Icon size={10} />
-            {meta.label}
-          </span>
         </div>
+        <span
+          className={`flex-shrink-0 inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full ${meta.badgeClass}`}
+          data-testid={`badge-type-${run.id}`}
+        >
+          <Icon size={10} />
+          {meta.label}
+        </span>
+      </div>
 
-        {/* Meta row */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground mb-3">
-          <span className="flex items-center gap-1">
-            <Clock size={11} />
-            <span className="font-medium text-foreground">{formatDate(run.date)}</span>
-            &nbsp;·&nbsp;{formatTime(run.startTime)}
-          </span>
-          <span className="flex items-center gap-1">
-            <MapPin size={11} />
-            <span className="truncate max-w-[180px]">{run.meetingPoint.split(",")[0]}</span>
-          </span>
-        </div>
+      {/* Meta row */}
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground mb-3">
+        <span className="flex items-center gap-1">
+          <Clock size={11} />
+          <span className="font-medium text-foreground">{formatDate(run.date)}</span>
+          &nbsp;·&nbsp;{formatTime(run.startTime)}
+        </span>
+        <span className="flex items-center gap-1">
+          <MapPin size={11} />
+          <span className="truncate max-w-[180px]">{run.meetingPoint.split(",")[0]}</span>
+        </span>
+      </div>
 
-        {/* Stats row */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 text-xs">
-            <span className="text-primary font-semibold">{run.distanceKm} km</span>
-            {run.paceMin && run.paceMax && (
-              <span className="text-muted-foreground">{run.paceMin}–{run.paceMax} /km</span>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            {/* Participant avatars */}
-            <div className="flex -space-x-1.5">
-              {run.participants.slice(0, 4).map((p) => (
-                <Avatar key={p.id} user={p} size={22} />
-              ))}
-            </div>
-            <span className={`text-xs ${isFull ? "text-destructive" : "text-muted-foreground"}`}>
-              <Users size={11} className="inline mr-0.5" />
-              {capacityText}
-              {isFull && " · Full"}
-            </span>
-            {isCompleted && (
-              <span className="text-xs text-muted-foreground italic">Completed</span>
-            )}
-          </div>
+      {/* Stats row */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 text-xs">
+          <span className="text-primary font-semibold">{run.distanceKm} km</span>
+          {run.paceMin && run.paceMax && (
+            <span className="text-muted-foreground">{run.paceMin}–{run.paceMax} /km</span>
+          )}
         </div>
-      </a>
+        <div className="flex items-center gap-2">
+          {/* Participant avatars */}
+          <div className="flex -space-x-1.5">
+            {run.participants.slice(0, 4).map((p) => (
+              <Avatar key={p.id} user={p} size={22} />
+            ))}
+          </div>
+          <span className={`text-xs ${isFull ? "text-destructive" : "text-muted-foreground"}`}>
+            <Users size={11} className="inline mr-0.5" />
+            {capacityText}
+            {isFull && " · Full"}
+          </span>
+          {isCompleted && (
+            <span className="text-xs text-muted-foreground italic">Completed</span>
+          )}
+        </div>
+      </div>
     </Link>
   );
 }
@@ -236,14 +235,13 @@ export default function CommunityFeedPage() {
             <h1 className="text-xl font-display font-bold text-foreground">Community Runs</h1>
             <p className="text-sm text-muted-foreground mt-0.5">Join a run or host your own</p>
           </div>
-          <Link href="/community/create">
-            <a
-              className="flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-3.5 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
-              data-testid="button-create-run"
-            >
-              <Plus size={15} />
-              Host a Run
-            </a>
+          <Link
+            href="/community/create"
+            className="flex items-center gap-1.5 bg-primary text-primary-foreground text-sm font-semibold px-3.5 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
+            data-testid="button-create-run"
+          >
+            <Plus size={15} />
+            Host a Run
           </Link>
         </div>
 
@@ -289,11 +287,12 @@ export default function CommunityFeedPage() {
               <div className="text-center py-16">
                 <p className="text-3xl mb-3">🏃</p>
                 <p className="text-muted-foreground text-sm">No runs found. Why not host one?</p>
-                <Link href="/community/create">
-                  <a className="inline-flex items-center gap-1.5 mt-4 bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline">
-                    <Plus size={14} />
-                    Host a Run
-                  </a>
+                <Link
+                  href="/community/create"
+                  className="inline-flex items-center gap-1.5 mt-4 bg-primary text-primary-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors no-underline"
+                >
+                  <Plus size={14} />
+                  Host a Run
                 </Link>
               </div>
             )}
