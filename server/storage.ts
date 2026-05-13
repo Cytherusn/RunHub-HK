@@ -25,7 +25,15 @@ export async function initDb() {
       avatar_color TEXT NOT NULL,
       location TEXT NOT NULL DEFAULT 'Hong Kong',
       bio TEXT,
+      gender TEXT,
+      profile_picture_url TEXT,
+      running_since INTEGER,
+      preferred_pace TEXT,
+      personal_records TEXT,
+      preferred_types TEXT,
       total_runs INTEGER NOT NULL DEFAULT 0,
+      total_hosted INTEGER NOT NULL DEFAULT 0,
+      total_rsvps INTEGER NOT NULL DEFAULT 0,
       avg_rating REAL,
       created_at TEXT NOT NULL,
       email TEXT,
@@ -36,6 +44,49 @@ export async function initDb() {
       role TEXT NOT NULL DEFAULT 'user'
     );
   `);
+
+  // ─── Migrations: Add new columns if they don't exist ──────────────────────
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN gender TEXT;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN profile_picture_url TEXT;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN running_since INTEGER;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN preferred_pace TEXT;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN personal_records TEXT;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN preferred_types TEXT;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN total_hosted INTEGER NOT NULL DEFAULT 0;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+  try {
+    db.run(`ALTER TABLE users ADD COLUMN total_rsvps INTEGER NOT NULL DEFAULT 0;`);
+  } catch (e: any) {
+    // Silently ignore if column already exists
+  }
+
   db.run(`
     CREATE TABLE IF NOT EXISTS community_runs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -104,7 +155,7 @@ export interface IStorage {
   createUser(user: any): Promise<User>;
   insertUser(user: InsertUser): Promise<User>;
   updateUserStats(id: number, data: Partial<User>): Promise<void>;
-  updateUserProfile(id: number, data: { name?: string; bio?: string; location?: string }): Promise<User>;
+  updateUserProfile(id: number, data: { name?: string; bio?: string; location?: string; gender?: string; profilePictureUrl?: string; runningSince?: number; preferredPace?: string; personalRecords?: string; preferredTypes?: string }): Promise<User>;
   updateUserGoogleAvatar(id: number, avatar: string): Promise<void>;
   getRunsHostedThisMonth(userId: number): Promise<number>;
 

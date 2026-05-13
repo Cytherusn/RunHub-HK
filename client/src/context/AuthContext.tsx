@@ -12,7 +12,15 @@ export interface AuthUser {
   authProvider: string;
   bio: string | null;
   location: string;
+  gender: string | null;
+  profilePictureUrl: string | null;
+  runningSince: number | null;
+  preferredPace: string | null;
+  personalRecords: Array<{ distance: string; time: string; date: string }>;
+  preferredTypes: string[];
   totalRuns: number;
+  totalHosted: number;
+  totalRsvps: number;
   avgRating: number | null;
 }
 

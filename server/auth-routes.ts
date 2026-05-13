@@ -19,7 +19,15 @@ export function registerAuthRoutes(app: Express) {
         authProvider: u.authProvider,
         bio: u.bio,
         location: u.location,
+        gender: u.gender,
+        profilePictureUrl: u.profilePictureUrl,
+        runningSince: u.runningSince,
+        preferredPace: u.preferredPace,
+        personalRecords: u.personalRecords ? JSON.parse(u.personalRecords) : [],
+        preferredTypes: u.preferredTypes ? JSON.parse(u.preferredTypes) : [],
         totalRuns: u.totalRuns,
+        totalHosted: u.totalHosted,
+        totalRsvps: u.totalRsvps,
         avgRating: u.avgRating,
       });
     } else {

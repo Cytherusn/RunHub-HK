@@ -299,8 +299,18 @@ export function registerCommunityRoutes(app: Express) {
         return res.status(403).json({ error: "Forbidden" });
       }
 
-      const { name, bio, location } = req.body;
-      const updatedUser = await storage.updateUserProfile(userId, { name, bio, location });
+      const { name, bio, location, gender, profilePictureUrl, runningSince, preferredPace, personalRecords, preferredTypes } = req.body;
+      const updateData: any = { name, bio, location, gender, profilePictureUrl, runningSince, preferredPace };
+      
+      // Store JSON arrays as strings
+      if (personalRecords) {
+        updateData.personalRecords = typeof personalRecords === 'string' ? personalRecords : JSON.stringify(personalRecords);
+      }
+      if (preferredTypes) {
+        updateData.preferredTypes = typeof preferredTypes === 'string' ? preferredTypes : JSON.stringify(preferredTypes);
+      }
+
+      const updatedUser = await storage.updateUserProfile(userId, updateData);
       res.json(updatedUser);
     } catch (e) {
       res.status(500).json({ error: String(e) });

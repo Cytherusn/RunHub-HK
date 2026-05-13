@@ -78,7 +78,15 @@ export const users = sqliteTable("users", {
   avatarColor: text("avatar_color").notNull(),
   location: text("location").notNull().default("Hong Kong"),
   bio: text("bio"),
+  gender: text("gender"), // 'male', 'female', 'prefer-not-to-say'
+  profilePictureUrl: text("profile_picture_url"), // URL to uploaded profile photo
+  runningSince: integer("running_since"), // Year they started running
+  preferredPace: text("preferred_pace"), // e.g. "6:30/km"
+  personalRecords: text("personal_records"), // JSON string: [{distance, time, date}]
+  preferredTypes: text("preferred_types"), // JSON string: ["Trail", "Road", "Track", etc]
   totalRuns: integer("total_runs").notNull().default(0),
+  totalHosted: integer("total_hosted").notNull().default(0),
+  totalRsvps: integer("total_rsvps").notNull().default(0),
   avgRating: real("avg_rating"),
   createdAt: text("created_at").notNull(),
   email: text("email"),
