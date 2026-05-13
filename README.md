@@ -67,6 +67,20 @@ npm start
 
 ---
 
+## 🧑‍🤝‍🧑 Profile Features
+RunHub profiles now support richer runner details, including:
+- Real profile photo upload (`profilePictureUrl`)
+- Short bio/description (`bio`)
+- Gender selection (`gender`)
+- Running history and preferences:
+  - `runningSince` — year they started running
+  - `preferredPace` — example: `6:30/km`
+  - `personalRecords` — JSON array of `{ distance, time, date }`
+  - `preferredTypes` — JSON array of run types such as Trail, Road, Track, Fun Run, and Recovery
+- Social metrics on profile:
+  - `totalHosted` — number of events hosted
+  - `totalRsvps` — RSVP count / runs attended
+
 ## 🔒 Security & Optimization
 - **Helmet**: Integrated for secure HTTP headers.
 - **Node.js Native Env**: Uses `--env-file` (Node v20+) for environment variable management.
